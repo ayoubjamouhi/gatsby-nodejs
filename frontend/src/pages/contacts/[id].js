@@ -1,15 +1,19 @@
 import React,{useState, useEffect} from "react";
 import { Link } from "gatsby";
 import Axios from 'axios';
-function ProductCatchAll({ params }) {
+function ContactID({ params }) {
   const [contact, setContact] = useState({});
   useEffect(()=>{
-    fetch('http://localhost:3000/contacts/'+params.id)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setContact(data);
-    });
+    const fetchFun = () => {
+
+      return fetch(`http://localhost:3000/contacts/${params.id}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setContact(data);
+      });
+    }
+    fetchFun();
   },[]);
   const handleChange = function(e){
     setContact({
@@ -19,7 +23,7 @@ function ProductCatchAll({ params }) {
   };
   const submit = async function(e){
     e.preventDefault();
-    await Axios.post('http://localhost:3000/contact', {name: contact.name, age: contact.age});
+    await Axios.put('http://localhost:3000/contacts', {id: contact._id, name: contact.name, age: contact.age});
   }
   return (
     <div className="wrapper">
@@ -38,7 +42,7 @@ function ProductCatchAll({ params }) {
             <input type="text" name="age" value={contact.age} onChange={handleChange}/>
           </div>
           <div>
-            <button type="submit" onClick={submit}>Add</button>
+            <button type="submit" onClick={submit}>Edit</button>
           </div>
         </form>
       </main>
@@ -46,4 +50,4 @@ function ProductCatchAll({ params }) {
   )
 }
 
-export default ProductCatchAll
+export default ContactID;

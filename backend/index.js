@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose  from 'mongoose';
+import dotenv from 'dotenv';
 
-require('dotenv').config({ path: 'variables.env' });
+dotenv.config({ path: 'variables.env' });
 
-mongoose.connect(process.env.DATABASE, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -11,7 +12,9 @@ db.once('open', function() {
 });
 
 
-const app = require('./app');
+//const app = require('./app');
+
+import app from './app.js';
 
 app.set('port', process.env.PORT || 3000);
 

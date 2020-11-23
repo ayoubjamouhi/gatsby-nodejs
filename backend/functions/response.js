@@ -1,5 +1,6 @@
 exports.checkRes = (res,object) => {
+  console.log(object);
   if(object != null)
     return res.json(object);
-  return JSON.parse('Not found');
+  return res.json('Not found');
 }
