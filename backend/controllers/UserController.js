@@ -8,13 +8,12 @@ export async function signup (req,res) {
   try {
     const user = await new User({...req.body, password}).save();
     const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET);
+    console.log({cookkie: res.cookie});
     res.cookie('token', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365 // 1 yeqr
     });
     delete user['__v'];
-    console.log({user});
-    console.log(req.cookies);
     res.json(user);
   } catch(e) {
     res.send('Error');

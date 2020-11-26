@@ -1,6 +1,12 @@
-import  express from 'express';
-import  { getAllContacts, getById, putById, postContact } from '../controllers/ContactController.js';
-import  { signup } from '../controllers/UserController.js';
+import express from 'express';
+import {
+  getAllContacts,
+  getById,
+  putById,
+  postContact,
+} from '../controllers/ContactController';
+import { signup } from '../controllers/UserController';
+
 const router = express.Router();
 
 router.get('/contacts', getAllContacts);

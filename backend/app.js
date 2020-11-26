@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser());
 app.use(function(req, res, next) {
   const { io }= req.cookies;
-  console.log(req.cookies);
+  console.log(9);
   next();
 });
 app.use(cors());
