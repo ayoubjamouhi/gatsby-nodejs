@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-function Header(){
+function Header() {
   return (
     <header className="bg-gray-100 p-4 ">
       <ul className="flex justify-end">
