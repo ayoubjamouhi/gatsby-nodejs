@@ -1,14 +1,31 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
- */
+// import dotenv from 'dotenv';
 
+const dotenv = require('dotenv');
+
+dotenv.config({ path: '.env' });
 module.exports = {
-  plugins: [{
-    resolve: `gatsby-plugin-postcss`,
-    options: {
-      // Accepts all options defined by `gatsby-plugin-postcss` plugin.
+  siteMetadata: {
+    title: 'Gatsby',
+    siteUrl: 'https://jamostore.com',
+    description: 'Jamo store!',
+  },
+  plugins: [
+    'babel-plugin-styled-components',
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        // Accepts all options defined by `gatsby-plugin-postcss` plugin.
+      },
     },
-  },],
-}
+    {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: `in0kcvbu`,
+        dataset: `production`,
+        token: process.env.SANITY_TOKEN,
+        graphqlTag: 'default',
+        watchMode: true,
+      },
+    },
+  ],
+};
