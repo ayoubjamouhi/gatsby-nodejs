@@ -5,11 +5,13 @@ const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby',
+    title: 'Jamo Store',
     siteUrl: 'https://jamostore.com',
     description: 'Jamo store!',
+    twitter: '@gemouhi',
   },
   plugins: [
+    'gatsby-plugin-react-helmet',
     'babel-plugin-styled-components',
     {
       resolve: `gatsby-plugin-postcss`,

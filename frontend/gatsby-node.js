@@ -1,9 +1,9 @@
 const path = require('path');
 
 async function turnProductsIntoPages({ graphql, actions }) {
-  // const { createPage } = actions;
+  const { createPage } = actions;
   const productTemplate = path.resolve('./src/templates/Product.js');
-  const { data } = await graphql`
+  const { data } = await graphql(`
     query {
       products: allSanityProduct {
         nodes {
@@ -13,18 +13,16 @@ async function turnProductsIntoPages({ graphql, actions }) {
         }
       }
     }
-  `;
-  // data.nodes.products.forEach((edge) => {
-  // console.log(edge);
-  // createPage({
-  // path: `${edge.node.slug}`,
-  // component: blogPostTemplate,
-  // context: {
-  // title: edge.node.title,
-  // },
-  // });
-  // });
-  console.log(data);
+  `);
+  data.products.nodes.forEach((edge) => {
+    createPage({
+      path: `product/${edge.slug.current}`,
+      component: productTemplate,
+      context: {
+        slug: edge.slug.current,
+      },
+    });
+  });
 }
 
 export async function createPages(params) {
